@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .panel-heading {
+
+            font-size: 19px;
+            font-weight: 500;
+
+        }
+
+        .image1{
+        background-image: url("/static/back.jpg");
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover;
+        height:80%;
+        width:80%;
+    }
+
+        #article_title {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 24px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: bold;
+            font-variant: bold;
+            text-transform: capitalize;
+        }
+
+        #article_summary {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+
+         #article_location {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+        #article_eventtype {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+
+        #article_date {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+        #article_parties {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+        #teamname {
+
+            font-size: 35px;
+            font-weight: 700;
+
+        }
+        #screen_name {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 16px;
+            color: #000000;
+            font-weight: 400;
+            text-decoration: none solid rgb(68, 68, 68);
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+
+        #date {
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            font-size: 13px;
+            color: #8e5ea2;
+            font-weight: 300;
+            font-style: normal;
+            font-variant: normal;
+            text-transform: capitalize;
+        }
+
+        .filters {
+            font-family: "Times New Roman", Times, serif;
+            font-size: 19px;
+            letter-spacing: 0.4px;
+            word-spacing: -2.6px;
+            color: #c45850;
+            font-weight: 700;
+            text-decoration: underline solid rgb(68, 68, 68);
+            font-style: italic;
+            font-variant: normal;
+            text-transform: none;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+
+    <script src="/static/jQWCloud.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE34WBrpiAXit9qXhpzCE1N3xTOXsnJXM&callback=initMap"></script>
+
+</head>
+<body>
+    <div>
+        <div style="margin-left: 60px;margin-right: 60px;">
+        <form method="POST">
+          <br>
+                <div class="row">
+                    <div class="col-md-2">
+
+
+                    </div>
+                    <div class="col-md-5">
+                        <br>
+                         <label id="teamname">      News Digest</label>
+
+                    </div>
+                    <div class="col-md-5"><br>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                              <div class="modal-dialog" role="document" style="height:700px;width:1500px;">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Overall Analysis</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-4 container">
+                                            <h3>Count of Tweets by Cities</h3>
+                                           <div id="map" class = "image1"style="width: 400px; height: 300px;">
+
+                                           </div>
+                                          </div>
+                                        <div class="col-md-4" container>
+                                            <h3>Tweet Count by Topics</h3>
+                                            <canvas id="tophashtags" width="800" height="500"></canvas>
+                                        </div>
+                                        <div class="col-md-4" container>
+                                            <h3>Tweet Count by Languages</h3>
+                                            <canvas id="topmentions" width="800" height="500"></canvas>
+
+                                        </div>
+                                    </div>
+
+
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                    </div>
+                </div>
+                <br>
+            <div class="row">
+                <div class="col-md-2">
+
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">Filter Results</div>
+                      <div class="panel-body">
+                          <h4 class="filters">Topics</h4>
+                        <input type="checkbox" name="topic" value="Protests" id="crime"> Protests<br>
+                        <input type="checkbox" name="topic" value="Riots" id="politics"> Riots<br>
+                        <input type="checkbox" name="topic" value="Violence" id="infra"> Violence against civilians<br>
+
+                            <h4 class="filters">Locations</h4>
+
+                                <input type="checkbox" name="country" value="India" id="india"> India<br>
+                                <input type="checkbox" name="country" value="Indonesia" id="indonesia"> Indonesia<br>
+                                <input type="checkbox" name="country" value="Thailand" id="thailand"> Thailand<br>
+
+
+                            <h4 class="filters">Dates</h4>
+                           <div class="form-group">
+
+                            <select class="selectpicker form-control" id="dateSelector" name="dateSelector">
+                                <option value="none">-Select-</option>
+                              <option value="lastweek">Last week</option>
+                              <option value="lastmonth">Last Month</option>
+                                <option value="last6month">Last 6 Months</option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Search</button>&nbsp;
+                      </div>
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-9">
+
+                    <div class="panel panel-primary">
+                          <div class="panel-heading">Results</div>
+                          <div class="panel-body">
+                               {%for re in result%}
+                            <div id = {{re}}>
+                                <span id="article_title">{{re.title}}</span>
+                                <br>
+                                <span id="article_summary">Summary : </span> <span>{{re.summary}}</span><br>
+                                <span id="article_location">Location : </span> <span>{{re.location}}</span><br>
+                                <span id="article_eventtype">Event Type :  </span><span>{{re.eventType}}</span>
+                                <br>
+                                <span id="article_date">Event date :  </span><span>{{re.date}}</span><br>
+                                <span id="article_parties">Parties Involved :   </span><span>{{re.parties}}</span>
+                                <br>
+                                <a href="{{re.url}}" target="_blank">{{re.url}}</a>
+
+                                </p>
+                                <br>
+                            </div>
+                        {% endfor %}
+                          </div>
+                    </div>
+
+
+                </div>
+
+    </div>
+
+</body>
+</html>
